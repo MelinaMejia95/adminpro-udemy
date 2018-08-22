@@ -5,6 +5,7 @@ import { ProgressComponent } from "./progress/progress.component";
 import { Graficas1Component } from "./graficas1/graficas1.component";
 import { PagesComponent } from "./pages.component";
 import { sharedModule } from "../shared/shared.module";
+import { PAGES_ROUTES } from './pages.routes';
 
 
 
@@ -21,7 +22,8 @@ import { sharedModule } from "../shared/shared.module";
         Graficas1Component
     ],
     imports: [
-        sharedModule
+        sharedModule,
+        PAGES_ROUTES
     ]
 })
 export class PagesModule {}
