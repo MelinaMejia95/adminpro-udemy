@@ -24,7 +24,7 @@
   <div class="col-6">
     <div class="card">
       <div class="card-body">
-          <app-incrementador (cambioValor)="actualizar( $event )" nombre="Progress azul" [porcentaje]="porcentaje1"></app-incrementador>
+        <app-incrementador (actualizaValor)="porcentaje1 = $event" nombre="Progress azul" [porcentaje]="porcentaje1"></app-incrementador>
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@
   <div class="col-6">
     <div class="card">
       <div class="card-body">
-          <app-incrementador nombre="Progress verde" [porcentaje]="porcentaje2"></app-incrementador>
+        <app-incrementador (actualizaValor)="porcentaje2 = $event" nombre="Progress verde" [porcentaje]="porcentaje2"></app-incrementador> 
       </div>
     </div>
   </div>
