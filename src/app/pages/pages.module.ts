@@ -8,11 +8,11 @@ import { Graficas1Component } from "./graficas1/graficas1.component";
 import { PagesComponent } from "./pages.component";
 import { sharedModule } from "../shared/shared.module";
 import { PAGES_ROUTES } from './pages.routes';
-import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
 
 //Temporal
 import { IncrementadorComponent } from "../components/incrementador/incrementador.component";
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
 
 
 @NgModule({

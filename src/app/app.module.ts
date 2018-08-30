@@ -4,6 +4,10 @@ import { NgModule } from '@angular/core';
 //Rutas
 import { APP_ROUTES } from './app.routes';
 
+//Temporal
+import { FormsModule } from '@angular/forms';
+
+
 //Módulos
 import { PagesModule } from './pages/pages.module';
 
@@ -22,7 +26,8 @@ import { ServiceModule } from './services/service.module';
   imports: [
     BrowserModule,
     APP_ROUTES,
-    PagesModule,
+    PagesModule,   
+    FormsModule,
     ServiceModule
   ],
   providers: [],
