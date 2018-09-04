@@ -77,7 +77,7 @@ export class UsuarioService {
       .pipe(map( (data: any) => {
         this.guardarStorage(data.id, data.token, data.usuario);
         return true;
-      }))
+      }));
 
   }
 
@@ -86,11 +86,23 @@ export class UsuarioService {
     let url = URL_SERVICIOS + '/usuario';
     return this.http.post( url, usuario )
      .pipe(map( (data: any) => {
-        console.log('Creado');
         swal('Usuario Creado', usuario.email, 'success');
         return data.usuario;
-      })
-    )
+      }));
+
+  }
+
+  actualizarUsuario( usuario: Usuario ) {
+    
+    let url = URL_SERVICIOS + '/usuario/' + usuario._id;
+    url += '?token=' + this.token;
+    return this.http.put(url, usuario)
+      .pipe(map((data: any) => {
+        let usuarioDB: Usuario = data.usuario;
+        this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+        swal('Usuario actualizado', usuario.nombre, 'success');
+        return true;
+      }));
 
   }
 
