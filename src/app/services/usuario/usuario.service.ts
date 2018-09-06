@@ -99,10 +99,14 @@ export class UsuarioService {
     url += '?token=' + this.token;
     return this.http.put(url, usuario)
       .pipe(map((data: any) => {
-        let usuarioDB: Usuario = data.usuario;
-        this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+
+        if(usuario._id === this.usuario._id) {
+          let usuarioDB: Usuario = data.usuario;
+          this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+        }
         swal('Usuario actualizado', usuario.nombre, 'success');
         return true;
+
       }));
 
   }
@@ -135,6 +139,18 @@ export class UsuarioService {
     return this.http.get(url)
       .pipe(map( (data: any) => data.usuarios))
       
+  }
+
+  borrarUsuario(id: string) {
+    
+    let url = URL_SERVICIOS + '/usuario/' + id;
+    url += '?token=' + this.token;
+    return this.http.delete(url)
+      .pipe(map( data => {
+        swal('Usuario borrado', 'El usuario ha sido eliminado correctamente', 'success');
+        return true;
+      }));
+
   }
 
 }

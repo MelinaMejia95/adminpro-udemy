@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
 
+declare var swal: any;
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -57,6 +59,36 @@ export class UsuariosComponent implements OnInit {
       this.usuarios = usuarios;
       this.cargando = false;
     })
+
+  }
+
+  borrarUsuario(usuario: Usuario) {
+
+    if (usuario._id === this._usuarioService.usuario._id) {
+      swal('No puede borrar usuario', 'No se puede borrar a si mismo', 'error');
+      return;
+    }
+
+    swal({
+      title: "¿Está seguro?",
+      text: "Está a punto de borrar a " + usuario.nombre,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then(borrar => {
+      if (borrar) {
+        this._usuarioService.borrarUsuario(usuario._id).subscribe(data => {
+          this.cargarUsuarios();
+        })
+      } 
+    });
+
+  }
+
+  guardarUsuario(usuario: Usuario) {
+
+    this._usuarioService.actualizarUsuario(usuario).subscribe();
 
   }
 
