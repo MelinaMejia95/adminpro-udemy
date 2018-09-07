@@ -8,7 +8,7 @@ export class ModalUploadService {
   public tipo: string;
   public id: string;
   public oculto: string = 'oculto';
-  public notificacion = new EventEmitter<any>();
+  public notificacion = new EventEmitter<any>(); 
 
   constructor() { }
 

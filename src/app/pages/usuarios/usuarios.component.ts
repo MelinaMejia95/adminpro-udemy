@@ -87,6 +87,7 @@ export class UsuariosComponent implements OnInit {
     .then(borrar => {
       if (borrar) {
         this._usuarioService.borrarUsuario(usuario._id).subscribe(data => {
+          this.desde = this.desde - 5;
           this.cargarUsuarios();
         })
       } 
