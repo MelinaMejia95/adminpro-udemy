@@ -24,7 +24,6 @@ export class MedicosComponent implements OnInit {
   cargarMedicos() {
 
     this._medicoService.cargarMedicos(this.desde).subscribe( data => {
-      console.log(data)
       this.totalRegistros = this._medicoService.totalMedicos;
       this.medicos = data;
     });
@@ -48,7 +47,6 @@ export class MedicosComponent implements OnInit {
   cambiarDesde(valor: number) {
     
     let desde = this.desde + valor;
-    console.log(desde);
     if(desde >= this.totalRegistros) {
       return;
     }

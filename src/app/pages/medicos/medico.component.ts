@@ -50,15 +50,12 @@ export class MedicoComponent implements OnInit {
 
   guardarMedico(f: NgForm) {
     
-    console.log(f.valid)
-    console.log(f.value)
     if(f.invalid) {
       return;
     }
     this._medicoService.guardarMedico(this.medico).subscribe( data => {
       this.medico._id = data._id;
       this.router.navigate(['/medico', data._id]);
-      console.log(data)
     });
 
   }
@@ -66,7 +63,6 @@ export class MedicoComponent implements OnInit {
   cambioHospital(id: string) {
 
     this._hospitalSerice.obtenerHospital(id).subscribe( (hospital: any) => {
-      console.log(hospital)
       this.hospital = hospital });
 
   }

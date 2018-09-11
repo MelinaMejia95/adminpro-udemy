@@ -9,6 +9,7 @@ import { CommonModule } from "@angular/common";
 
 //Pipes
 import { PipesModule } from "../pipes/pipes.module";
+import { ModalUploadComponent } from "../components/modal-upload/modal-upload.component";
 
 @NgModule({
     imports: [
@@ -20,13 +21,15 @@ import { PipesModule } from "../pipes/pipes.module";
         HeaderComponent,
         SidebarComponent,
         BreadcrumsComponent,
-        NopagefoundComponent
+        NopagefoundComponent,
+        ModalUploadComponent
     ],
     exports: [
         HeaderComponent,
         SidebarComponent,
         BreadcrumsComponent,
-        NopagefoundComponent
+        NopagefoundComponent,
+        ModalUploadComponent
     ]
 })
 export class sharedModule {}
