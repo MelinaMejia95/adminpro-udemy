@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -87,6 +88,10 @@ export class UsuarioService {
         console.log(data)
         this.guardarStorage(data.id, data.token, data.usuario, data.menu);
         return true;
+      }),
+      catchError( err => {
+        swal('Error en el login', err.error.mensaje, 'error');
+        return Observable.throw(err);
       }));
 
   }
@@ -98,6 +103,10 @@ export class UsuarioService {
      .pipe(map( (data: any) => {
         swal('Usuario Creado', usuario.email, 'success');
         return data.usuario;
+      }),
+      catchError( err => {
+        swal(err.error.mensaje , err.error.errors.message, 'error');
+        return Observable.throw(err);
       }));
 
   }
@@ -116,6 +125,10 @@ export class UsuarioService {
         swal('Usuario actualizado', usuario.nombre, 'success');
         return true;
 
+      }),
+      catchError( err => {
+        swal(err.error.mensaje, err.error.errors.message, 'error');
+        return Observable.throw(err);
       }));
 
   }
@@ -158,6 +171,10 @@ export class UsuarioService {
       .pipe(map( data => {
         swal('Usuario borrado', 'El usuario ha sido eliminado correctamente', 'success');
         return true;
+      }),
+      catchError( err => {
+        swal(err.error.mensaje, err.error.errors.message, 'error');
+        return Observable.throw(err);
       }));
 
   }

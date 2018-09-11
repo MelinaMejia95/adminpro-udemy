@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { URL_SERVICIOS } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Hospital } from '../../models/hospital.model';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
@@ -56,6 +57,10 @@ export class HospitalService {
       .pipe(map( data => {
           swal('Hospital borrado', 'El hospital se ha eliminado correctamente', 'success');
           return true;
+      }),
+      catchError( err => {
+        swal(err.error.mensaje, err.error.errors.message, 'error');
+        return Observable.throw(err);
       }));
 
   }
@@ -68,7 +73,11 @@ export class HospitalService {
       .pipe(map( data => {
         swal('Hospital creado', 'El hospital se ha creado correctamente', 'success');
         return true;
-      }))
+      }),
+      catchError( err => {
+        swal(err.error.mensaje, err.error.errors.message, 'error');
+        return Observable.throw(err);
+      }));
 
   }
 
@@ -88,6 +97,10 @@ export class HospitalService {
       .pipe(map((data: any) => {
         swal('Hospital actualizado', hospital.nombre, 'success');
         return true;
+      }),
+      catchError( err => {
+        swal(err.error.mensaje, err.error.errors.message, 'error');
+        return Observable.throw(err);
       }));
 
   }

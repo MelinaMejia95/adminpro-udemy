@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Medico } from '../../models/medico.model';
@@ -41,6 +42,10 @@ export class MedicoService {
       .pipe(map( data => {
         swal('Médico borrado', 'Médico elimiando correctamente', 'success');
         return data;
+      }),
+      catchError( err => {
+        swal(err.error.mensaje, err.error.errors.message, 'error');
+        return Observable.throw(err);
       }));
 
   }
@@ -57,6 +62,10 @@ export class MedicoService {
         .pipe(map( (data: any) => {
           swal('Médico actualizado', medico.nombre, 'success')
           return data.medico;
+        }),
+        catchError( err => {
+          swal(err.error.mensaje, err.error.errors.message, 'error');
+          return Observable.throw(err);
         }));
     } else {
       //Crear
@@ -65,6 +74,10 @@ export class MedicoService {
         .pipe(map( (data: any) => {
           swal('Médico creado', medico.nombre, 'success')
           return data.medico;
+        }),
+        catchError( err => {
+          swal(err.error.mensaje, err.error.errors.message, 'error');
+          return Observable.throw(err);
         }));
     }
 
