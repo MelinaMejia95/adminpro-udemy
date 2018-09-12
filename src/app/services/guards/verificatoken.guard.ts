@@ -13,9 +13,11 @@ export class VerificatokenGuard implements CanActivate {
   }
 
   canActivate(): Promise<boolean> | boolean {
-   
+
     let token = this._usuarioService.token;
-    let payload = JSON.parse( atob( token.split('.')[1] ) ) ;//atob descodifica una cadena de datos que ha sido codificada en base-64
+    console.log(token)
+    let payload = JSON.parse( atob(token.split('.')[1]) ); //atob descodifica una cadena de datos que ha sido codificada en base-64
+    console.log(payload);
     let expirado = this.expirado(payload.exp);
 
     if (expirado) {
@@ -24,7 +26,7 @@ export class VerificatokenGuard implements CanActivate {
     }
 
     return this.verificaRenueva(payload.exp);
-
+    
   }
 
   verificaRenueva( fechaExp: number ): Promise<boolean> {

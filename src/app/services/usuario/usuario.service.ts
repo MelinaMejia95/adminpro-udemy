@@ -5,7 +5,8 @@ import { URL_SERVICIOS } from '../../config/config';
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,7 @@ export class UsuarioService {
                 catchError( err => {
                   this.router.navigate(['/login']);
                   swal('No se pudo renovar token', 'No fue posible renovar el token', 'error');
-                  return Observable.throw(err);
+                  return throwError(err);
                 }));
 
   }
@@ -65,7 +66,7 @@ export class UsuarioService {
     localStorage.setItem('usuario', JSON.stringify(usuario));
     localStorage.setItem('menu', JSON.stringify(menu));
     this.usuario = usuario;
-    this.token = id;
+    this.token = token;
     this.menu = menu;
 
   }

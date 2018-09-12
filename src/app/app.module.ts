@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'; 
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 //Rutas
 import { APP_ROUTES } from './app.routes';
@@ -35,7 +35,7 @@ import { sharedModule } from './shared/shared.module';
     HttpClientModule,
     sharedModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

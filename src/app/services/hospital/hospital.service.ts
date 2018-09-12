@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Hospital } from '../../models/hospital.model';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
